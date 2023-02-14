@@ -4,6 +4,7 @@ package com.example.notebookrebuild2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -29,7 +30,10 @@ class MainActivity : ComponentActivity() {
 
 @Inject lateinit var noteRepository : NoteRepository
 
- //var oneNoteVIewModel: OneNoteVIewModel by viewModels()
+
+ private val oneNoteVIewModel: OneNoteVIewModel by viewModels()
+    private val allNotesVIewModel: AllNotesVIewModel by viewModels()
+ //private val oneNoteVIewModel by lazy {ViewModelProviders.of(this).get(UserViewModel::class.java)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +46,8 @@ class MainActivity : ComponentActivity() {
 
         //val factory=ViewModelProvider.Factory
 
-         val allNotesVIewModel = AllNotesVIewModel(noteRepository)
-         val oneNoteVIewModel = OneNoteVIewModel(noteRepository)
+        // val allNotesVIewModel = AllNotesVIewModel(noteRepository)
+        // val oneNoteVIewModel = OneNoteVIewModel(noteRepository)
          //val settingsMaster = SettingsMaster(context.createDataStore("settings"))
 
 

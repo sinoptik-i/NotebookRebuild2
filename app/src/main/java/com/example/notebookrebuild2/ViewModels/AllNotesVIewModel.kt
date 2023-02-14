@@ -9,8 +9,8 @@ import sin.android.notebook.data.INotesRepository
 import sin.android.notebook.data.Note
 import javax.inject.Inject
 
-//@HiltViewModel
-class AllNotesVIewModel(//) @Inject constructor(
+@HiltViewModel
+class AllNotesVIewModel @Inject constructor(
     private val noteRepository: INotesRepository
 ) : ViewModel() {
 

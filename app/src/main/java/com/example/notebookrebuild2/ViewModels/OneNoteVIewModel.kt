@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-//@HiltViewModel
-class OneNoteVIewModel (//@Inject constructor(
+@HiltViewModel
+class OneNoteVIewModel @Inject constructor(
     private val noteRepository: INotesRepository
 ) : ViewModel() {
 

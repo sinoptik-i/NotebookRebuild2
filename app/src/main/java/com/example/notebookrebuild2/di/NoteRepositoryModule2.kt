@@ -9,7 +9,6 @@ import sin.android.notebook.data.INotesRepository
 import sin.android.notebook.data.NoteRepository
 
 
-/*
 // etot module vawe ne nujen
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,4 +16,4 @@ abstract class NoteRepositoryModule2 {
     @Binds
     abstract fun providesNoteRepository(noteRepository: NoteRepository): INotesRepository
 
-}*/
+}
