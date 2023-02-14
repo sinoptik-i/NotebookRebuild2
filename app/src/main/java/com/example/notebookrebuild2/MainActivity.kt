@@ -1,49 +1,50 @@
 package com.example.notebookrebuild2
 
-import android.app.Application
-import android.content.Context
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.notebookrebuild2.ui.theme.NotebookRebuild2Theme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import dagger.hilt.android.AndroidEntryPoint
 import sin.android.notebook.ViewModels.AllNotesVIewModel
 import sin.android.notebook.ViewModels.OneNoteVIewModel
 import sin.android.notebook.data.Note
-import sin.android.notebook.data.NoteDatabase
 import sin.android.notebook.data.NoteRepository
 import sin.android.notebook.screens.AllNotesView
 import sin.android.notebook.screens.OneFullNote
-import androidx.datastore.preferences.createDataStore
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
 
+@Inject lateinit var settingsMaster: SettingsMaster
 
+@Inject lateinit var noteRepository : NoteRepository
+
+ //var oneNoteVIewModel: OneNoteVIewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         val context=applicationContext
+        // val context=applicationContext
 
-         val noteRepository = NoteRepository(
+       /*  val noteRepository = NoteRepository(
             NoteDatabase.getDatabase(context).noteDao(),
             CoroutineScope(Dispatchers.IO + SupervisorJob())
-        )
+        )*/
 
+        //val factory=ViewModelProvider.Factory
 
          val allNotesVIewModel = AllNotesVIewModel(noteRepository)
          val oneNoteVIewModel = OneNoteVIewModel(noteRepository)
-         val settingsMaster = SettingsMaster(context.createDataStore("settings"))
+         //val settingsMaster = SettingsMaster(context.createDataStore("settings"))
 
 
         setContent {

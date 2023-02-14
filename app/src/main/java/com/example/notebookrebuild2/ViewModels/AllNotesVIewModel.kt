@@ -1,20 +1,20 @@
 package sin.android.notebook.ViewModels
 
-import android.app.Application
-import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import sin.android.notebook.data.INotesRepository
 import sin.android.notebook.data.Note
-import sin.android.notebook.data.NoteDao
-import sin.android.notebook.data.NoteDatabase
-import sin.android.notebook.data.NoteRepository
+import javax.inject.Inject
 
-class AllNotesVIewModel(// @Inject constructor(
-    private val noteRepository: NoteRepository
+//@HiltViewModel
+class AllNotesVIewModel(//) @Inject constructor(
+    private val noteRepository: INotesRepository
 ) : ViewModel() {
 
-    private val _query = MutableStateFlow<String>("")
+    private val _query = MutableStateFlow("")
 
     fun flowAllNotes() = _query
         // .debounce(1000L)

@@ -14,4 +14,19 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    @Test
+    fun collections() {
+        val collection = arrayListOf(1, 2, 3)
+        var elem=5
+        if (collection.contains(elem)){
+            collection.remove(elem)
+        }
+        println(collection)
+        elem=2
+        if (collection.contains(elem)){
+            collection.remove(elem)
+        }
+        println(collection)
+    }
 }

@@ -1,13 +1,16 @@
 package sin.android.notebook.ViewModels
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import sin.android.notebook.data.INotesRepository
 import sin.android.notebook.data.Note
-import sin.android.notebook.data.NoteRepository
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class OneNoteVIewModel(// @Inject constructor(
-    private val noteRepository: NoteRepository
+//@HiltViewModel
+class OneNoteVIewModel (//@Inject constructor(
+    private val noteRepository: INotesRepository
 ) : ViewModel() {
 
     private fun addNote(note: Note) = noteRepository.addNote(note)

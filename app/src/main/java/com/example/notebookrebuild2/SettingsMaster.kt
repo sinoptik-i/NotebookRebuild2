@@ -6,9 +6,11 @@ import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.preferencesKey
 import androidx.datastore.preferences.toMutablePreferences
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-//@Singleton
-class SettingsMaster(// @Inject constructor(
+@Singleton
+class SettingsMaster @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
 
@@ -23,7 +25,4 @@ class SettingsMaster(// @Inject constructor(
     }
 
     fun isDarkThemeFlow() = dataStore.data.map { it.get(DARK_THEME) ?: false }
-
-
-
 }
