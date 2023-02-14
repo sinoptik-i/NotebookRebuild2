@@ -1,5 +1,7 @@
 package sin.android.notebook.ViewModels
 
+import android.annotation.SuppressLint
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import sin.android.notebook.data.INotesRepository
@@ -12,6 +14,12 @@ import javax.inject.Inject
 class OneNoteVIewModel @Inject constructor(
     private val noteRepository: INotesRepository
 ) : ViewModel() {
+
+    var currentDescription = ""
+    var currentId = 0
+    var currentTitle = ""
+
+
 
     private fun addNote(note: Note) = noteRepository.addNote(note)
 
@@ -40,12 +48,13 @@ class OneNoteVIewModel @Inject constructor(
             )
             return true
         }
-
-
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun getNowTime(): String {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy hh:mm")
         return dateFormat.format(Calendar.getInstance().timeInMillis)
     }
+
+
 }

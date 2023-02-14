@@ -1,5 +1,6 @@
 package sin.android.notebook.screens
 
+import androidx.compose.animation.expandHorizontally
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -28,7 +29,10 @@ fun TitleTextField(title: MutableState<String>) {
 }
 
 @Composable
-fun DescriptionTextField(description: MutableState<String>) {
+fun DescriptionTextField(
+    description: MutableState<String>,
+    oneNoteVIewModel: OneNoteVIewModel
+) {
     TextField(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 4.dp)
@@ -36,6 +40,7 @@ fun DescriptionTextField(description: MutableState<String>) {
         value = description.value,
         onValueChange = {
             description.value = it
+            oneNoteVIewModel.currentDescription = it
             // onContinueClicked(text)
         },
         label = { Text("Description:") }
@@ -49,17 +54,21 @@ fun OneFullNote(
     onContinueClicked: () -> Unit,
     oneNoteVIewModel: OneNoteVIewModel
 ) {
-    var textTitle = remember {
+    val textTitle = remember {
         mutableStateOf(
             note.title
         )
     }
 //    var textDescription by rememberSaveable { mutableStateOf("") }
-    var textDescription = remember {
+    val textDescription = remember {
         mutableStateOf(
             note.description
         )
     }
+    oneNoteVIewModel.currentId=note.id
+    oneNoteVIewModel.currentTitle=textTitle.value
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -86,9 +95,9 @@ fun OneFullNote(
                 contentDescription = null
             )
         }
-      //  Text(text = "${note.time}")
+        //  Text(text = "${note.time}")
         TitleTextField(title = textTitle)
-        DescriptionTextField(description = textDescription)
+        DescriptionTextField(description = textDescription,oneNoteVIewModel)
     }
 }
 
