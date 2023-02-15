@@ -45,34 +45,16 @@ class MainActivity : ComponentActivity() {
 
     private val oneNoteVIewModel: OneNoteVIewModel by viewModels()
     private val allNotesVIewModel: AllNotesVIewModel by viewModels()
-    private var startNote = Note(0, "", "", "")
-
-    //private val oneNoteVIewModel by lazy {ViewModelProviders.of(this).get(UserViewModel::class.java)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.e(TAG, "onCr")
-
-        /*   if(resources.configuration.orientation==Configuration.ORIENTATION_PORTRAIT){
-
-           }*/
-        // val context=applicationContext
-
-        /*  val noteRepository = NoteRepository(
-             NoteDatabase.getDatabase(context).noteDao(),
-             CoroutineScope(Dispatchers.IO + SupervisorJob())
-         )*/
-
-        //val factory=ViewModelProvider.Factory
-
-        // val allNotesVIewModel = AllNotesVIewModel(noteRepository)
-        // val oneNoteVIewModel = OneNoteVIewModel(noteRepository)
-        //val settingsMaster = SettingsMaster(context.createDataStore("settings"))
-
-
         setContent {
-            NotebookRebuild2Theme {
+            val darkThemeState = settingsMaster.isDarkThemeFlow().collectAsState(initial = false)
+
+            NotebookRebuild2Theme{
+//darkThemeState
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -83,35 +65,11 @@ class MainActivity : ComponentActivity() {
                         allNotesVIewModel = allNotesVIewModel,
                         oneNoteVIewModel = oneNoteVIewModel,
                         settingsMaster = settingsMaster,
-                        startNote
+
                     )
                 }
             }
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt(ID, oneNoteVIewModel.currentId)
-        outState.putString(TITLE, oneNoteVIewModel.currentTitle)
-        outState.putString(DESCRIPTION, oneNoteVIewModel.currentDescription)
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        val currentId = savedInstanceState.getInt(ID, 0)
-        val currentTitle = savedInstanceState.getString(TITLE, "")
-        val currentDescription = savedInstanceState.getString(DESCRIPTION, "")
-        if (currentDescription != "" || currentTitle != "") {
-            startNote = Note(
-                currentId,
-                currentTitle,
-                currentDescription,
-                oneNoteVIewModel.getNowTime()
-            )
-        }
-
     }
 
 
@@ -122,15 +80,16 @@ fun MainFun(
     allNotesVIewModel: AllNotesVIewModel,
     oneNoteVIewModel: OneNoteVIewModel,
     settingsMaster: SettingsMaster,
-    startNote: Note
+
 ) {
-    // if true - table with all notes, false - one note
+
     var seeAllNotes by rememberSaveable { mutableStateOf(true) }
-    // val note = remember { mutableStateOf(Note(0, "", "", "")) }
-    val note = remember { mutableStateOf(startNote) }
+
+    var note=remember{mutableStateOf(oneNoteVIewModel.currentNotee)}
     if (seeAllNotes) {
         AllNotesView(
             onNoteSelect = {
+
                 note.value = it
             },
             onAddNewNoteClicked = { seeAllNotes = false },

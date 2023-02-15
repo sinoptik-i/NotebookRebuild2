@@ -31,7 +31,7 @@ fun TitleTextField(title: MutableState<String>) {
 @Composable
 fun DescriptionTextField(
     description: MutableState<String>,
-    oneNoteVIewModel: OneNoteVIewModel
+    // oneNoteVIewModel: OneNoteVIewModel
 ) {
     TextField(
         modifier = Modifier
@@ -40,7 +40,7 @@ fun DescriptionTextField(
         value = description.value,
         onValueChange = {
             description.value = it
-            oneNoteVIewModel.currentDescription = it
+            //   oneNoteVIewModel.currentDescription = it
             // onContinueClicked(text)
         },
         label = { Text("Description:") }
@@ -65,9 +65,13 @@ fun OneFullNote(
             note.description
         )
     }
-    oneNoteVIewModel.currentId=note.id
-    oneNoteVIewModel.currentTitle=textTitle.value
 
+    oneNoteVIewModel.currentNotee = Note(
+        note.id,
+        textTitle.value,
+        textDescription.value,
+        oneNoteVIewModel.getNowTime()
+    )
 
     Column(
         modifier = Modifier
@@ -97,7 +101,7 @@ fun OneFullNote(
         }
         //  Text(text = "${note.time}")
         TitleTextField(title = textTitle)
-        DescriptionTextField(description = textDescription,oneNoteVIewModel)
+        DescriptionTextField(description = textDescription)//,oneNoteVIewModel)
     }
 }
 

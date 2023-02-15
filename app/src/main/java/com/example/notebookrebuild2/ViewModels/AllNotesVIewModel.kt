@@ -1,5 +1,6 @@
 package sin.android.notebook.ViewModels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,19 @@ class AllNotesVIewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _query = MutableStateFlow("")
+
+    lateinit var  TAG:String
+
+    init {
+        TAG=this.javaClass.simpleName
+        Log.e(TAG,"I born")
+    }
+
+
+    override fun onCleared() {
+        Log.e(TAG,"Ama dead")
+        super.onCleared()
+    }
 
     fun flowAllNotes() = _query
         // .debounce(1000L)

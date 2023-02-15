@@ -2,6 +2,7 @@ package sin.android.notebook.ViewModels
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import sin.android.notebook.data.INotesRepository
@@ -15,11 +16,9 @@ class OneNoteVIewModel @Inject constructor(
     private val noteRepository: INotesRepository
 ) : ViewModel() {
 
-    var currentDescription = ""
-    var currentId = 0
-    var currentTitle = ""
 
 
+    var currentNotee= Note(0, "", "", "")
 
     private fun addNote(note: Note) = noteRepository.addNote(note)
 
