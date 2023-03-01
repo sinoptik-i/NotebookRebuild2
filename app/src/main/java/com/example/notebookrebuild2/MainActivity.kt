@@ -1,13 +1,11 @@
 package com.example.notebookrebuild2
 
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -18,7 +16,6 @@ import com.example.notebookrebuild2.ui.theme.NotebookRebuild2Theme
 import dagger.hilt.android.AndroidEntryPoint
 import sin.android.notebook.ViewModels.AllNotesVIewModel
 import sin.android.notebook.ViewModels.OneNoteVIewModel
-import sin.android.notebook.data.Note
 import sin.android.notebook.data.NoteRepository
 import sin.android.notebook.screens.AllNotesView
 import sin.android.notebook.screens.OneFullNote
